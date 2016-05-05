@@ -89,7 +89,49 @@
 									<p>Ticket assignee (If none leave blank):</p>
 									<input type="text" name="ticket_to">
 									<button class="small button" type="submit" name="submit">Submit</button>
+									<button class="small button" type="button" name="closeOne" id="showClose">Close a ticket</button>
 								</form>
+							</div>
+							<div class="closeBay">
+								<div class="row">
+									<div class="large-6 columns">
+										<div class="callout large">
+											<form class="closeATicket" method="post" action="backend.php">
+												<p>Enter ticket to close name:</p>
+												<input type="text" name="ticket_close">
+												<button class="small button" type="submit" name="closeer">Close</button>
+											</form>
+											<?php
+
+											$severname = "localhost";
+											$username = "root";
+											$password = "";
+											$db = "simplelogin";
+
+											$conn = new mysqli($severname, $username, $password, $db);
+
+											if (mysqli_connect_errno()) {
+    											printf("Connect failed: %s\n", mysqli_connect_error());
+    											exit();
+											}
+
+											$ticketToClose = $_POST['ticket_close'];
+
+											$ticketCloser = "DELETE FROM tickets WHERE name='$ticketToClose'";
+											if(mysqli_query($conn, $ticketCloser))
+											{
+												echo "Ticket has been deleted";
+											}
+											else
+											{
+												echo "Error: " . mysqli_error($conn);
+											}
+
+											$conn->close();
+											?>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="ticketDisplay">
 								<!-- Dynamic Tickets -->
@@ -115,17 +157,12 @@
 
 								while($row = mysqli_fetch_array($result))
 								{
-									echo "<tr><td>" . $row['name'] . "<tr><td>" . $row['description'] . "<tr><td>" . $row['creator'] . "<tr><td>" . $row['assignee'] . "<tr><td>";
+									echo "<tr><td>" . $row['name'] . "<tr><td>" . $row['description'] . "<tr><td>" . $row['creator'] . "<tr><td>" . $row['assignee'] . "<tr><td>" . $row['id'] . "<tr><td>";
 								}
 
 								echo "</table>";
 
 								$conn->close();
-
-								function delete()
-								{
-									//We Will pick back up here tomorrow!!!
-								}
 								?>
 							</div>
 						</div>
@@ -133,5 +170,20 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			
+			var bay = $('.closeBay').hide();
+
+			$('#showClose').click(function()
+			{
+				$('.closeBay').slideToggle(function()
+				{
+					if($(this).is(':hidden'))
+					{
+						$(this).hide();
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
