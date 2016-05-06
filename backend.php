@@ -90,6 +90,7 @@
 									<input type="text" name="ticket_to">
 									<button class="small button" type="submit" name="submit">Submit</button>
 									<button class="small button" type="button" name="closeOne" id="showClose">Close a ticket</button>
+									<button class="small button" type="button" name="editOne" id="showEdit">Edit a ticket</button>
 								</form>
 							</div>
 							<div class="closeBay">
@@ -128,6 +129,52 @@
 											}
 
 											$conn->close();
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="editBay">
+								<div class="row">
+									<div class="large-6 columns">
+										<div class="callout large">
+											<form class="editATicket" method="post" action="backend.php">
+												<p>Enter ticket to edit name:</p>
+												<input type="text" name="ticket_edit">
+												<p>Enter ticket description:</p>
+												<input type="text" name="new_ticket_desc">
+												<button class="small button" type="submit" name="editor">Edit</button>
+											</form>
+											<?php
+
+
+											$severname = "localhost";
+											$username = "root";
+											$password = "";
+											$db = "simplelogin";
+
+											$conn = new mysqli($severname, $username, $password, $db);
+
+											if (mysqli_connect_errno()) {
+    											printf("Connect failed: %s\n", mysqli_connect_error());
+    											exit();
+											}
+
+											$ticketToEdit = $_POST['ticket_edit'];
+											$newDescription = $_POST['new_ticket_desc'];
+
+											$ticketEditor = "UPDATE tickets SET description = '$newDescription' WHERE name = '$ticketToEdit'";
+											if(mysqli_query($conn, $ticketEditor))
+											{
+												echo "Ticket has been updated!";
+											}
+											else
+											{
+												echo "Error: " . mysqli_error($conn);
+											}
+
+											$conn->close();
+
 											?>
 										</div>
 									</div>
@@ -177,6 +224,19 @@
 			$('#showClose').click(function()
 			{
 				$('.closeBay').slideToggle(function()
+				{
+					if($(this).is(':hidden'))
+					{
+						$(this).hide();
+					}
+				});
+			});
+
+			var editBay = $('.editBay').hide();
+
+			$('#showEdit').click(function()
+			{
+				$('.editBay').slideToggle(function()
 				{
 					if($(this).is(':hidden'))
 					{
