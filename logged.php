@@ -29,13 +29,7 @@
 	<body>
 		<div class="container">
 			<div class="header">
-				<div class="row">
-					<div class="large-12 columns">
-						<div class="callout large">
-							<h1>You have logged in!</h1>
-						</div>
-					</div>
-				</div>
+				<img src="assets/Untitled.png">
 			</div>
 			<div class="noVowels">
 				<div class="row">

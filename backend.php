@@ -5,17 +5,7 @@
 		header("Location:index.php");
 	}
 
-	$severname = "localhost";
-	$username = "root";
-	$password = "";
-	$db = "simplelogin";
-
-	$conn = new mysqli($severname, $username, $password, $db);
-
-	if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-	}
+	include 'connection.php';
 
 	$ticname = $_POST['ticket_name'];
 	$ticdesc = $_POST['ticket_desc'];
@@ -37,7 +27,6 @@
 	}
 
 	$conn->close();
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,8 +56,7 @@
 					<div class="large-12 columns">
 						<div class="callout large">
 							<h1>Black Gekko Backend</h1>
-							<p>USERS NAME</p>
-							<p>USERS STATUS</p>
+							<p>You are logged in as: <?php echo $_SESSION['username'];?></p>
 							<button class="small button" type="submit" name="submit" onclick="location.href = 'index.php'">Logout</button>
 						</div>
 					</div>
@@ -104,17 +92,7 @@
 											</form>
 											<?php
 
-											$severname = "localhost";
-											$username = "root";
-											$password = "";
-											$db = "simplelogin";
-
-											$conn = new mysqli($severname, $username, $password, $db);
-
-											if (mysqli_connect_errno()) {
-    											printf("Connect failed: %s\n", mysqli_connect_error());
-    											exit();
-											}
+											include 'connection.php';
 
 											$ticketToClose = $_POST['ticket_close'];
 
@@ -146,19 +124,8 @@
 												<button class="small button" type="submit" name="editor">Edit</button>
 											</form>
 											<?php
-
-
-											$severname = "localhost";
-											$username = "root";
-											$password = "";
-											$db = "simplelogin";
-
-											$conn = new mysqli($severname, $username, $password, $db);
-
-											if (mysqli_connect_errno()) {
-    											printf("Connect failed: %s\n", mysqli_connect_error());
-    											exit();
-											}
+											
+											include 'connection.php';
 
 											$ticketToEdit = $_POST['ticket_edit'];
 											$newDescription = $_POST['new_ticket_desc'];
@@ -181,21 +148,9 @@
 								</div>
 							</div>
 							<div class="ticketDisplay">
-								<!-- Dynamic Tickets -->
 								<?php
-								//Create edit function
 
-								$severname = "localhost";
-								$username = "root";
-								$password = "";
-								$db = "simplelogin";
-
-								$conn = new mysqli($severname, $username, $password, $db);
-
-								if (mysqli_connect_errno()) {
-    								printf("Connect failed: %s\n", mysqli_connect_error());
-    								exit();
-								}
+								include 'connection.php';
 
 								$showTicketsQuery = "SELECT * FROM tickets";
 								$result = mysqli_query($conn, $showTicketsQuery) or die(mysql_error());
@@ -204,7 +159,7 @@
 
 								while($row = mysqli_fetch_array($result))
 								{
-									echo "<tr><td>" . $row['name'] . "<tr><td>" . $row['description'] . "<tr><td>" . $row['creator'] . "<tr><td>" . $row['assignee'] . "<tr><td>" . $row['id'] . "<tr><td>";
+									echo "<tr><td><a href='ticket.php?id=$row[id]'>" . $row['name'] . "</a><tr><td>" . $row['description'] . "<tr><td>" . $row['creator'] . "<tr><td>" . $row['assignee'] . "<tr><td>" . $row['id'] . "<tr><td>";
 								}
 
 								echo "</table>";

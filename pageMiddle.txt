@@ -1,0 +1,12 @@
+<div class="mainContent">
+		<div class="row">
+			<div class="large-12 columns">
+				<div class="calout large">
+					<p>Ticket name</p>
+					<p>Ticket desc</p>
+					<p>Ticket creator</p>
+					<p>Ticket assignee</p>
+				</div>
+			</div>
+		</div>
+	</div>

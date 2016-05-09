@@ -1,18 +1,7 @@
 <?php
-
+	
+	include 'connection.php';
 	session_start();
-
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$db = "simplelogin";
-
-	$mysqli = new mysqli($servername, $username, $password, $db);
-
-	if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-	}
 
 	if(isset($_POST['username']))
 	{
@@ -20,7 +9,7 @@
 		$pass = $_POST['password'];
 
 		$query = "SELECT * FROM users WHERE username='".$user."' AND password='".$pass."'";
-		$result = mysqli_query($mysqli, $query) or die(mysql_error());
+		$result = mysqli_query($conn, $query) or die(mysql_error());
 		$rows = mysqli_num_rows($result);
 		if($rows == 1)
 		{
@@ -34,6 +23,8 @@
 			error_log('A error has occured, please contact the site administrator');
 		}
 	}
+
+	$conn->close();
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,13 +50,7 @@
 	<body>
 		<div class="container">
 			<div class="header">
-				<div class="row">
-					<div class="large-12 columns">
-						<div class="callout large">
-							<h1>Gekko Login</h1>
-						</div>
-					</div>
-				</div>
+				<img src="assets/Untitled.png">
 			</div>
 			<div class="login">
 				<div class="row">

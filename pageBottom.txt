@@ -1,0 +1,12 @@
+<div class="footer">
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="callout large">
+				<p>&copy Black Gekko Development 2016</p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>
