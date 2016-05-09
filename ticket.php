@@ -27,6 +27,6 @@
 			</div>
 		</div>
 	</div>
-<?php
-	print $page->getBottom();
-?>
+	<?php
+		print $page->getBottom();
+	?>
