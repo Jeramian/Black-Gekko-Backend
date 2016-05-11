@@ -10,7 +10,7 @@
 	$getTicketInformation = "SELECT * FROM tickets WHERE id='$currentTicket'";
 	$ticketInfoResults = mysqli_query($conn, $getTicketInformation) or die(mysql_error());
 
-	$row = mysqli_fetch_array($ticketInfoResults);
+	$row = mysqli_fetch_array($ticketInfoResults);	
 
 ?>
 <div class="mainContent">
