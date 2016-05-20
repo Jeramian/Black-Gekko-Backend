@@ -77,8 +77,20 @@
                         <?php
 						
 						include 'connection.php';
-						
-						//Please halp
+
+						//Add new database entry to take the name of the current ticket.
+
+						$getTicketComments = "SELECT * FROM comments WHERE comForTic = $row['name']";
+						$getTicketCommentsResults = mysqli_query($conn, $getTicketComments) or die(mysql_error());
+
+						echo "<table>";
+
+						while($row = mysqli_fetch_array($getTicketCommentsResults))
+						{
+
+						}
+
+						echo "</table>";
 						
 						?>
                     </div>
